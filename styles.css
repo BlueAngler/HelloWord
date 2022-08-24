@@ -10,7 +10,7 @@ html, body {
 
 #container {
     display: flex;
-    background-color: rgb(6, 6, 6);
+    background-color: rgb(17, 17, 17);
     height: 100%;
     align-items: center;
     flex-direction: column;
@@ -74,5 +74,13 @@ html, body {
     margin-right: 6px;
     border-radius: 4px;
     user-select: none;
+}
+
+.keyboard-row button.wide-button {
+    flex-grow: 1.5;
+}
+
+.spacer-half {
+    flex-grow: 0.5;
 }
 
