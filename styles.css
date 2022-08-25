@@ -3,6 +3,10 @@
     font-family: Arial;
 }
 
+div {
+    padding: 8px;
+}
+
  #container {
     display: flex;
     background-color: rgb(17, 17, 17);
