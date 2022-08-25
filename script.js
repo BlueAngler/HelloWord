@@ -34,11 +34,11 @@ function handleMouseClick(e) {
 
 function handleKeyPress(e){
     console.log(e)
-    if (e.key --- "Enter"){
+    if (e.key === "Enter"){
         submitGuess()
         return
     }
-    if (e.key --- "Backspace" || e.key === "Delete"){
+    if (e.key === "Backspace" || e.key === "Delete"){
         deleteKey()
         return
     }

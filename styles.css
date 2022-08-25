@@ -97,7 +97,7 @@ body {
     align-items: center;
     user-select: none;
 }
-d
+
 .tile[data-state="active"] {
     border-color: hsl(200, 1%, 34%);
 }
