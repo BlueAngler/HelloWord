@@ -2,7 +2,6 @@ const WORD_LENGTH = 5
 const guessGrid = document.querySelector("[data-guess-grid]")
 const targetWord = ""
 
-
 startInteraction()
 
 function startInteraction() {
@@ -58,9 +57,9 @@ function pressKey(key) {
     nextTile.dataset.state = "active"
 }
 
-function deleteKey(){
+function deleteKey() {
     const activeTiles = getActiveTiles()
-    const lastTile = activeTiles[activeTiles.lenth - 1]
+    const lastTile = activeTiles [activeTiles.length - 1]
     if (lastTile == null) return
     lastTile.textContent = ""
     delete lastTile.dataset.state
