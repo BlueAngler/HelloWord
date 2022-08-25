@@ -39,7 +39,7 @@ function handleKeyPress(e){
         return
     }
 
-    if (e.key --- "Backspace" || e.key === "Delete"){
+    if (e.key === "Backspace" || e.key === "Delete"){
         deleteKey()
         return
     }
@@ -76,7 +76,7 @@ function getActiveTiles() {
     return guessGrid.querySelectorAll('[data-state="active"]')
 }
 
-});
+
 
 
 
@@ -85,27 +85,26 @@ function getActiveTiles() {
 var easyEl = document.getElementById('easy');
 var mediumEl = document.getElementById('medium');
 var hardEl = document.getElementById('hard')
-var submitbuttonEl= document.getElementById('submitbutton');
-var worddisplayEl=document.getElementById('userdisplay')
-var lenght = ' '
-if (easyEl==='easy') {
-    lenght='5'
+var submitbuttonEl= document.getElementById('submit-btn');
+//var worddisplayEl=document.getElementById('userdisplay')
 
-}
-else if (mediumEl==='medium') {
-    lenght='7'
-}
 
-else if (hardEl==='hard') {
-    lenght='10'
-}
+let length
 
-else {
-    console.log('else if statement does not work')
-}
+let difficulty = "easy"
+
+
 
 function getApi() {
-    var randomwordrequesturl = 'https://random-word-api.herokuapp.com/word'  + lenght 
+    console.log(difficulty)
+    if (difficulty === "easy") {
+        length = "7";
+    } else if (difficulty = "medium") {
+        length = "7";
+    } else if (difficulty = "hard") {
+        length = "9";
+    }
+    var randomwordrequesturl = "https://random-word-api.herokuapp.com/word?length=" + length; 
     console.log(randomwordrequesturl)
     fetch(randomwordrequesturl)
         .then(function(response) {
@@ -113,22 +112,9 @@ function getApi() {
         })
         .then(function(data){
             console.log(data);
-            for (var i = 0; i < data.length; i++) {
-               
-               
-                }
-        })
-        
-        
-    
+            
+        })   
 }
-
-
-
-
-
-
-
-
-submitbuttonEl.addEventListener('click', fetch)
+getApi();
+//submitbuttonEl.addEventListener('click', getApi)
 
