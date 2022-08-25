@@ -91,11 +91,8 @@ if (easyEl === "easy") {
   console.log("else if statement does not work");
 }
 
-
-
 function getApi() {
- 
- console.log('inside fetchWord');
+  console.log("inside fetchWord");
   fetch(`https://random-word-api.herokuapp.com/word?length=${WORD_LENGTH}`)
     .then(function (response) {
       return response.json();
