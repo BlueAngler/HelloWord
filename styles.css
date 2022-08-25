@@ -3,6 +3,14 @@
     font-family: Arial;
 }
 
+ #container {
+    display: flex;
+    background-color: rgb(17, 17, 17);
+    height: 100%;
+    align-items: center;
+    flex-direction: column;
+} */
+
 body {
     background-color: hsl(240, 3%, 7%);
     display: flex;
@@ -146,13 +154,13 @@ html, body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-#container {
+/* #container {
     display: flex;
     background-color: rgb(17, 17, 17);
     height: 100%;
     align-items: center;
     flex-direction: column;
-}
+} */
 
 #game {
     width: 100%;
