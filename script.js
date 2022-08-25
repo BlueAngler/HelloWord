@@ -96,9 +96,9 @@ let difficulty = "easy"
 
 
 function getApi() {
-    console.log(difficulty)
+    //console.log(difficulty)
     if (difficulty === "easy") {
-        length = "7";
+        length = "5";
     } else if (difficulty = "medium") {
         length = "7";
     } else if (difficulty = "hard") {
