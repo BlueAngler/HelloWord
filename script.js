@@ -86,24 +86,24 @@ let length;
 let difficulty = "easy";
 
 function getApi() {
-  console.log(difficulty);
-  if (difficulty === "easy") {
-    length = "7";
-  } else if ((difficulty = "medium")) {
-    length = "7";
-  } else if ((difficulty = "hard")) {
-    length = "9";
-  }
-  var randomwordrequesturl =
-    "https://random-word-api.herokuapp.com/word?length=" + length;
-  console.log(randomwordrequesturl);
-  fetch(randomwordrequesturl)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-    });
+    //console.log(difficulty)
+    if (difficulty === "easy") {
+        length = "5";
+    } else if (difficulty = "medium") {
+        length = "7";
+    } else if (difficulty = "hard") {
+        length = "9";
+    }
+    var randomwordrequesturl = "https://random-word-api.herokuapp.com/word?length=" + length; 
+    console.log(randomwordrequesturl)
+    fetch(randomwordrequesturl)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data){
+            console.log(data);
+            
+        })   
 }
 getApi();
 //submitbuttonEl.addEventListener('click', getApi)
