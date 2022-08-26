@@ -90,9 +90,6 @@ var submitbuttonEl= document.getElementById('submit-btn');
 
 
 
-
-
-
 submitBtnEl.addEventListener("click", function () {
     var randomwordrequesturl = "https://random-word-api.herokuapp.com/word?length=5";
     console.log(randomwordrequesturl);
@@ -110,6 +107,38 @@ submitBtnEl.addEventListener("click", function () {
               'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
             }
           };
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Functions to open and close a modal
+    function openModal($el) {
+      $el.classList.add('is-active');
+    }
+  
+    function closeModal($el) {
+      $el.classList.remove('is-active');
+    }
+  
+    function closeAllModals() {
+      (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+        closeModal($modal);
+      });
+    }
+  
+    // Add a click event on buttons to open a specific modal
+    (document.querySelectorAll('.js-modal-trigger, .js-modal-trigger2') || []).forEach(($trigger) => {
+      const modal = $trigger.dataset.target;
+      const $target = document.getElementById(modal);
+  
+      $trigger.addEventListener('click', () => {
+        openModal($target);
+      });
+    });
+  
+    // Add a click event on various child elements to close the parent modal
+    (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+      const $target = $close.closest('.modal');
+      
   
           fetch('https://wordsapiv1.p.rapidapi.com/words/' + data[0] + '/definitions', options)
             .then(function(response) {
