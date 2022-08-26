@@ -122,22 +122,7 @@ body {
     background-color: hsl(115, 29%, 43%);
 }
 
-.js-modal-trigger {
-    display: none;
-    margin-bottom: 5px;
-    font-size: inherit;
-    grid-column: span 2;
-    border: none;
-    justify-content: center;
-    align-items: center;
-    background-color: hsl(200, 1%, 51%);
-    color: white;
-    fill: white;
-    text-transform: uppercase;
-    border-radius: .20em;
-    cursor: pointer;
-}
-.js-modal-trigger2 {
+.js-modal-trigger, .js-modal-trigger2 {
     display: none;
     margin-bottom: 5px;
     font-size: inherit;
