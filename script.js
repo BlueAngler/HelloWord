@@ -81,33 +81,33 @@ var hardEl = document.getElementById("hard");
 var submitbuttonEl = document.getElementById("submit-btn");
 //var worddisplayEl=document.getElementById('userdisplay')
 
-let length;
+// let length;
 
-let difficulty = "easy";
+// let difficulty = "easy";
 
-function getApi() {
-    //console.log(difficulty)
-    if (difficulty === "easy") {
-        length = "5";
-    } else if (difficulty = "medium") {
-        length = "7";
-    } else if (difficulty = "hard") {
-        length = "9";
-    }
-    var randomwordrequesturl = "https://random-word-api.herokuapp.com/word?length=" + length; 
-    console.log(randomwordrequesturl)
-    fetch(randomwordrequesturl)
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(data){
-            console.log(data);
+// function getApi() {
+//     //console.log(difficulty)
+//     if (difficulty === "easy") {
+//         length = "5";
+//     } else if (difficulty = "medium") {
+//         length = "7";
+//     } else if (difficulty = "hard") {
+//         length = "9";
+//     }
+//     var randomwordrequesturl = "https://random-word-api.herokuapp.com/word?length=" + length; 
+//     console.log(randomwordrequesturl)
+//     fetch(randomwordrequesturl)
+//         .then(function(response) {
+//             return response.json();
+//         })
+//         .then(function(data){
+//             console.log(data);
             
-        })   
-}
-getApi();
+//         })   
+// }
+// getApi();
 
-//submitbuttonEl.addEventListener('click', getApi)
+// submitbuttonEl.addEventListener('click', getApi)
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -155,3 +155,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  submitBtnEl.addEventListener("click", function () {
+    var randomwordrequesturl = "https://random-word-api.herokuapp.com/word?length=5";
+    console.log(randomwordrequesturl);
+    fetch(randomwordrequesturl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+        function getHintsApi() {
+          const options = {
+            method: 'GET',
+            headers: {
+              'X-RapidAPI-Key': 'df02901123mshf66abc7b8995688p190526jsn4d9ab6e75ba3',
+              'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+            }
+          };
+  
+          fetch('https://wordsapiv1.p.rapidapi.com/words/' + data[0] + '/definitions', options)
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(data){
+              console.log(data);
+            })
+  
+        }
+        getHintsApi();
+        console.log(data.definitions.str[0].definition);
+  
+      })
+      })
