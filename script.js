@@ -1,3 +1,7 @@
+/*
+
+*/
+
 const WORD_LENGTH = 5;
 const guessGrid = document.querySelector("[data-guess-grid]");
 const targetWord = "";
