@@ -82,7 +82,7 @@ function getActiveTiles() {
 var easyEl = document.getElementById("easy");
 var mediumEl = document.getElementById("medium");
 var hardEl = document.getElementById("hard");
-var submitbuttonEl = document.getElementById("submit-btn");
+var submitBtnEl = document.getElementById("submit-btn");
 //var worddisplayEl=document.getElementById('userdisplay')
 
 // let length;
@@ -183,11 +183,23 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(function(data){
               console.log(data);
+              document.getElementById("hint").innerHTML = data.definitions[0].definition;
+              //document.getElementById("hint2").innerHTML = 
+            })
+          
+          fetch("https://wordsapiv1.p.rapidapi.com/words/" + data[0] + "/synonyms", options)
+            .then(function(response){
+              return response.json();
+            })
+            .then(function(data){
+              console.log(data);
+              console.log(data.synonyms[0]);
+              document.getElementById("hint2").innerHTML = data.synonyms[0];
             })
   
         }
         getHintsApi();
-        console.log(data.definitions.str[0].definition);
+       
   
       })
       })
