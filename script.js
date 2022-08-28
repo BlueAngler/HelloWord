@@ -3,8 +3,10 @@
 */
 
 const WORD_LENGTH = 5;
+const alertContainer = document.querySelector("[data-alert-container]");
 const guessGrid = document.querySelector("[data-guess-grid]");
-const targetWord = "";
+const offsetFromDate = new Date(2022, 8, 28)
+const targetWord = ""
 
 startInteraction();
 
@@ -37,7 +39,7 @@ function handleMouseClick(e) {
 
 function handleKeyPress(e) {
   console.log(e);
-  if (e.key-- - "Enter") {
+  if (e.key === "Enter") {
     submitGuess();
     return;
   }
@@ -71,11 +73,49 @@ function deleteKey() {
   delete lastTile.dataset.letter;
 }
 
-function submitGuess() {}
+function submitGuess() {
+  const activeTiles = [...getActiveTiles()]
+  if (activeTiles.length !== WORD_LENGTH) {
+   console.log("not")
+    showAlert('Not Enough Letters')
+    shakeTiles(activeTiles)
+    return
+  }
+  const guess = activeTiles.reduce((word, tile) => {
+    return word + tile.dataset.letter
+  }, "")
+  console.log(guess)
+}
 
 function getActiveTiles() {
   return guessGrid.querySelectorAll('[data-state="active"]');
 }
+
+function shakeTiles(tiles) {
+  tiles.forEach(tile => {
+    tile.classList.add("shake")
+    tile.addEventListener("animationend", () => {
+      tile.classList.remove("shake")
+    }, { once: true })
+  })
+}
+
+function showAlert(message, duration = 1000) {
+const alert = document.createElement("div")
+alert.textContent = message
+alert.classList.add("alert")
+alertContainer.prepend(alert)
+if (duration == null) return
+ 
+setTimeout(() => {
+alert.classList.add("hide")
+addEventListener("transitionend", () => {
+  alert.remove()
+})
+}, duration)
+
+}
+
 
 ///added 8/23 @ 7:33pm
 
