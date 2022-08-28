@@ -20,17 +20,20 @@
         </p>
         </article>
         <div class="select is-primary">
-            <select>
-                <option value="" disabled selected>select a difficulty</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-            </select>
+            <form id="difficulty">
+                <select>
+                    <option value="" disabled selected>select a difficulty</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+                <div class="control">
+                    <button class="button is-primary" id="submit-btn">Submit</button>
+                </div>
+            </form>
         </div>
 
-        <div class="control">
-            <button class="button is-primary" id="submit-btn">Submit</button>
-        </div>
+        
         <button class="js-modal-trigger" data-target="modal-js-example">
             Definition
         </button>
