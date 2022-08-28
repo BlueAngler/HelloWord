@@ -1,4 +1,4 @@
-// variables to be called globally in board game
+
 const WORD_LENGTH = 5;
 const guessGrid = document.querySelector("[data-guess-grid]");
 const targetWord = "";
@@ -83,36 +83,8 @@ function getActiveTiles() {
 var easyEl = document.getElementById("easy");
 var mediumEl = document.getElementById("medium");
 var hardEl = document.getElementById("hard");
-var submitbuttonEl = document.getElementById("submit-btn");
-//var worddisplayEl=document.getElementById('userdisplay')
+var submitBtnEl = document.getElementById("submit-btn");
 
-let length;
-
-let difficulty = "easy";
-
-function getApi() {
-  //console.log(difficulty)
-  if (difficulty === "easy") {
-    length = "5";
-  } else if (difficulty = "medium") {
-    length = "7";
-  } else if (difficulty = "hard") {
-    length = "9";
-  }
-  var randomwordrequesturl = "https://random-word-api.herokuapp.com/word?length=" + length;
-  console.log(randomwordrequesturl)
-  fetch(randomwordrequesturl)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-
-    })
-}
-getApi();
-
-//submitbuttonEl.addEventListener('click', getApi)
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -150,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+
   // Add a keyboard event to close all modals
   document.addEventListener('keydown', (event) => {
     const e = event || window.event;
@@ -159,4 +132,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+
+  submitBtnEl.addEventListener("click", function () {
+    var randomwordrequesturl = "https://random-word-api.herokuapp.com/word?length=5";
+    console.log(randomwordrequesturl);
+    fetch(randomwordrequesturl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+        function getHintsApi() {
+          const options = {
+            method: 'GET',
+            headers: {
+              'X-RapidAPI-Key': 'df02901123mshf66abc7b8995688p190526jsn4d9ab6e75ba3',
+              'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+            }
+          };
+  
+          fetch('https://wordsapiv1.p.rapidapi.com/words/' + data[0] + '/definitions', options)
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(data){
+              console.log(data);
+              document.getElementById("hint").innerHTML = data.definitions[0].definition;
+              //document.getElementById("hint2").innerHTML = 
+            })
+          
+          fetch("https://wordsapiv1.p.rapidapi.com/words/" + data[0] + "/synonyms", options)
+            .then(function(response){
+              return response.json();
+            })
+            .then(function(data){
+              console.log(data);
+              console.log(data.synonyms[0]);
+              document.getElementById("hint2").innerHTML = data.synonyms[0];
+            })
+  
+        }
+        getHintsApi();
+       
+  
+      })
+      })
 
