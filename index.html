@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en">
 
 <head>
@@ -10,30 +10,45 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
+
+<!--modale for instructions-->
+<header>
+    <button class="js-modal-trigger3" data-target="modal-js-example">
+        Instructions
+      </button>
+</header>
 <body>
+   
+    
     <div id="container">
         <p class="panel-heading">
-            Hello Word!
+            Hello, Word!
 
         </p>
         </article>
         <div class="select is-primary">
-            <select>
+            <select id="difficulty" onchange="getDifficulty();">
                 <option value="" disabled selected>select a difficulty</option>
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
             </select>
         </div>
+
         <div class="control">
-            <button class="button is-primary">Submit</button>
+            <button class="button is-primary" id="submit-btn">Submit</button>
         </div>
-        <button class="js-modal-trigger" data-target="modal-js-example">
+            
+
+        
+        <button class="js-modal-trigger" id="modal-btn1" data-target="modal-js-example">
             Definition
         </button>
-        <button class="js-modal-trigger2" data-target="modal-js-example2">
+        <button class="js-modal-trigger2" id="modal-btn2" data-target="modal-js-example2">
             Synonym
         </button>
+
+
         <div data-guess-grid class="guess-grid">
             <div class="tile"></div>
             <div class="tile"></div>
@@ -97,12 +112,15 @@
             <button class="key" data-key="N">N</button>
             <button class="key" data-key="M">M</button>
             <button data-delete class="key large">Delete</button>
-
-            <div id="modal-js-example" class="modal">
+           
+            <div class="alert-container" data-alert-container>
+                
+            
+                <div id="modal-js-example" class="modal">
                 <div class="modal-background"></div>
                 <div class="modal-content">
                     <div class="box">
-                        <p id="hint">Difinition</p>
+                        <p id="hint">Definition</p>
                         <!-- Your content -->
                     </div>
                 </div>
@@ -122,8 +140,43 @@
                 <button class="modal-close is-large" aria-label="close"></button>
             </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!--modale for instructions-->
+            <div id="modal-js-example" class="modal">
+                <div class="modal-background"></div>
+              
+                <div class="modal-content">
+                  <div class="box">
+                    <p>Modal JS example</p>
+                    <!-- Your content -->
+                  </div>
+                </div>
+              
+                <button class="modal-close is-large" aria-label="close"></button>
+              </div>
 </body>
 <script src="./script.js"></script>
-</body>
+
 
 </html>
