@@ -20,7 +20,7 @@
         </p>
         </article>
         <div class="select is-primary">
-            <select>
+            <select id="difficulty" onchange="getDifficulty();">
                 <option value="" disabled selected>select a difficulty</option>
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
@@ -34,10 +34,10 @@
             
 
         
-        <button class="js-modal-trigger" data-target="modal-js-example">
+        <button class="js-modal-trigger" id="modal-btn1" data-target="modal-js-example">
             Definition
         </button>
-        <button class="js-modal-trigger2" data-target="modal-js-example2">
+        <button class="js-modal-trigger2" id="modal-btn2" data-target="modal-js-example2">
             Synonym
         </button>
 
