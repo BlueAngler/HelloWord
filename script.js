@@ -200,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(function(data){
               console.log(data);
+              console.log(data.definitions[0].definition);
               document.getElementById("hint").innerHTML = data.definitions[0].definition;
               //document.getElementById("hint2").innerHTML = 
             })
@@ -220,4 +221,21 @@ document.addEventListener('DOMContentLoaded', () => {
   
       })
       })
+
+
+function getDifficulty() {
+  var difficulty = document.getElementById("difficulty").value;
+  console.log(difficulty);
+  if (difficulty === "easy") {
+    document.querySelector(".js-modal-trigger").style.display = "block";
+    document.querySelector(".js-modal-trigger2").style.display = "block";
+  } else if (difficulty === "medium") {
+    document.querySelector(".js-modal-trigger").style.display = "block";
+    document.querySelector(".js-modal-trigger2").style.display = "none";
+  } else if (difficulty === "hard") {
+    document.querySelector(".js-modal-trigger").style.display = "none";
+    document.querySelector(".js-modal-trigger2").style.display = "none";
+  }
+}
+
 
