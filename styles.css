@@ -154,9 +154,6 @@ body {
 
 
  .notenoughletters-container {
-
-/*.alert-container {
-
     position: fixed;
     top: 33vh;
     left: 50vw;
@@ -164,14 +161,8 @@ body {
     z-index: 1;
     display: flex;
     flex-direction: column;
-
     align-items: center; 
 } 
-
-
-    align-items: center;
-}
-*/
 
 .alert {
 pointer-events: none;
