@@ -182,7 +182,7 @@ margin-bottom: 0;
 }
 
 .js-modal-trigger, .js-modal-trigger2 {
-    display: none;
+    display: none; 
     margin-bottom: 5px;
     font-size: inherit;
     grid-column: span 2;
