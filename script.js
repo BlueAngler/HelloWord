@@ -1,8 +1,9 @@
-
 const WORD_LENGTH = 5;
+const FLIP_ANIMATION_DURATION = 500
+const DANCE_ANIMATION_DURATION= 500
+const keyboard = document.querySelector("[data-keyboard]");
 const alertContainer = document.querySelector("[data-alert-container]");
 const guessGrid = document.querySelector("[data-guess-grid]");
-const offsetFromDate = new Date(2022, 8, 28)
 const targetWord = ""
 
 startInteraction();
@@ -78,7 +79,7 @@ function deleteKey() {
 function submitGuess() {
   const activeTiles = [...getActiveTiles()]
   if (activeTiles.length !== WORD_LENGTH) {
-   console.log("not")
+    console.log("not")
     showAlert('Not Enough Letters')
     shakeTiles(activeTiles)
     return
@@ -87,11 +88,42 @@ function submitGuess() {
     return word + tile.dataset.letter
   }, "")
   console.log(guess)
+
+
+  stopInteraction()
+  activeTiles.forEach((...params) => flipTile(...params, guess))
 }
 
+function flipTile(tile, index, array, guess) {
+  const letter = tile.dataset.letter
+  const key = keyboard.querySelector(`[data-key="${letter}"i]`)
+  setTimeout(() => {
+    tile.classList.add("flip")
+  }, (index * FLIP_ANIMATION_DURATION) / 2)
+  tile.addEventListener("transitionend", () => {
+    tile.classList.remove("flip")
+    if (targetWord[index] === letter) {
+      tile.dataset.state = "correct"
+      key.classList.add("correct")
+    } else if (targetWord.includes(letter)) {
+      tile.dataset.state = "wrong-location"
+      key.classList.add("wrong-location")
+    } else {
+      tile.dataset.state = "wrong"
+      key.classList.add("wrong")
+    }
+    if (index === array.length - 1 ) {
+      tile.addEventListener("transitionend", () => {
+        startInteraction()
+        chekWinLose(guess, array)
+      }, { once: true })
+     
+    }
+  }, { once:true })
+}
 
 function getActiveTiles() {
-  return guessGrid.querySelectorAll('[data-state="active"]');
+  return guessGrid.querySelectorAll('[data-state="active"]')
 }
 
 function shakeTiles(tiles) {
@@ -104,19 +136,44 @@ function shakeTiles(tiles) {
 }
 
 function showAlert(message, duration = 1000) {
-const alert = document.createElement("div")
-alert.textContent = message
-alert.classList.add("alert")
-alertContainer.prepend(alert)
-if (duration == null) return
- 
-setTimeout(() => {
-alert.classList.add("hide")
-addEventListener("transitionend", () => {
-  alert.remove()
-})
-}, duration)
+  const alert = document.createElement("div")
+  alert.textContent = message
+  alert.classList.add("alert")
+  alertContainer.prepend(alert)
+  if (duration == null) return
 
+  setTimeout(() => {
+    alert.classList.add("hide")
+    addEventListener("transitionend", () => {
+      alert.remove()
+    })
+  }, duration)
+
+}
+
+function checkWinLose(guess, tiles) {
+  if (guess == targetWord) {
+    showAlert("YOU WIN!", 5000)
+    danceTiles(tiles)
+    stopInteraction()
+    return
+  }
+  const remainingTiles = guessGrid.querySelectorAll(":not([data-letter]")
+  if (remainingTiles.length === 0) {
+    showAlert(targetWord.toLocaleUpperCase(), null)
+    stopInteraction()
+  }
+}
+
+function danceTiles(tiles) {
+  tiles.forEach((tile, index) => {
+    setTimeout(() => {
+      tile.classList.add("dance")
+    tile.addEventListener("animationend", () => {
+      tile.classList.remove("dance")
+    }, { once: true })
+  }, index * DANCE_ANIMATION_DURATION / 5)
+  })
 }
 
 
@@ -177,51 +234,51 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-  submitBtnEl.addEventListener("click", function () {
-    var randomwordrequesturl = "https://random-word-api.herokuapp.com/word?length=5";
-    console.log(randomwordrequesturl);
-    fetch(randomwordrequesturl)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        console.log(data);
-        function getHintsApi() {
-          const options = {
-            method: 'GET',
-            headers: {
-              'X-RapidAPI-Key': 'df02901123mshf66abc7b8995688p190526jsn4d9ab6e75ba3',
-              'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
-            }
-          };
-  
-          fetch('https://wordsapiv1.p.rapidapi.com/words/' + data[0] + '/definitions', options)
-            .then(function(response) {
-              return response.json();
-            })
-            .then(function(data){
-              console.log(data);
-              console.log(data.definitions[0].definition);
-              document.getElementById("hint").innerHTML = data.definitions[0].definition;
-              //document.getElementById("hint2").innerHTML = 
-            })
-          
-          fetch("https://wordsapiv1.p.rapidapi.com/words/" + data[0] + "/synonyms", options)
-            .then(function(response){
-              return response.json();
-            })
-            .then(function(data){
-              console.log(data);
-              console.log(data.synonyms[0]);
-              document.getElementById("hint2").innerHTML = data.synonyms[0];
-            })
-  
-        }
-        getHintsApi();
-       
-  
-      })
-      })
+submitBtnEl.addEventListener("click", function () {
+  var randomwordrequesturl = "https://random-word-api.herokuapp.com/word?length=5";
+  console.log(randomwordrequesturl);
+  fetch(randomwordrequesturl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      function getHintsApi() {
+        const options = {
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': 'df02901123mshf66abc7b8995688p190526jsn4d9ab6e75ba3',
+            'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
+          }
+        };
+
+        fetch('https://wordsapiv1.p.rapidapi.com/words/' + data[0] + '/definitions', options)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            console.log(data);
+            console.log(data.definitions[0].definition);
+            document.getElementById("hint").innerHTML = data.definitions[0].definition;
+            //document.getElementById("hint2").innerHTML = 
+          })
+
+        fetch("https://wordsapiv1.p.rapidapi.com/words/" + data[0] + "/synonyms", options)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            console.log(data);
+            console.log(data.synonyms[0]);
+            document.getElementById("hint2").innerHTML = data.synonyms[0];
+          })
+
+      }
+      getHintsApi();
+
+
+    })
+})
 
 
 function getDifficulty() {
