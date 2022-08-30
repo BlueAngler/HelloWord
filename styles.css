@@ -197,4 +197,10 @@ margin-bottom: 0;
     cursor: pointer;
 }
 
-
+#instructionsbutton {
+    margin-bottom: 5px;
+    background-color: #00D1B2;
+    color: white;
+    border: none
+    
+}
