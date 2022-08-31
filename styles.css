@@ -230,10 +230,17 @@ margin-bottom: 0;
     cursor: pointer;
 }
 
-#instructionsbutton {
+/* #instructionsbutton {
     margin-bottom: 5px;
     background-color: #00D1B2;
     color: white;
     border: none
+    
+} */
+
+#instructionslink {
+    margin-bottom: 5px;
+    background-color: #00D1B2;
+    color: white;
     
 }
