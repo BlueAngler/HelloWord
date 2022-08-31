@@ -15,7 +15,7 @@ Hello, Word is a play off the popular game Wordle. It is a browser-based game wi
 - Words API
 
 ## Photos of Functionality:
-- Work in Progress
+![Hello, Word application](https://github.com/BlueAngler/HelloWord/blob/main/assets/images/HelloWord-screenshot.PNG)
 
 ## Collaborators:
 
