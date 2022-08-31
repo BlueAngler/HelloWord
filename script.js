@@ -4,7 +4,7 @@ const DANCE_ANIMATION_DURATION= 500
 const keyboard = document.querySelector("[data-keyboard]");
 const alertContainer = document.querySelector("[data-alert-container]");
 const guessGrid = document.querySelector("[data-guess-grid]");
-var targetWord = [];
+var targetWord;
 
 startInteraction();
 
@@ -88,7 +88,13 @@ function submitGuess() {
 
     return word + tile.dataset.letter
   }, "")
-  console.log(guess)
+  console.log(guess);
+
+  if (guess == targetWord) {
+    console.log("You Win");
+  } else {
+    
+  }
 
 
   stopInteraction()
@@ -154,6 +160,8 @@ function showAlert(message, duration = 1000) {
 }
 
 function checkWinLose(guess, tiles) {
+  console.log(guess);
+  console.log(targetWord);
   if (guess == targetWord) {
     showAlert("YOU WIN!", 5000)
     danceTiles(tiles)
@@ -206,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Add a click event on buttons to open a specific modal
-  (document.querySelectorAll('.js-modal-trigger, .js-modal-trigger2') || []).forEach(($trigger) => {
+  (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
     const modal = $trigger.dataset.target;
     const $target = document.getElementById(modal);
 
@@ -214,6 +222,15 @@ document.addEventListener('DOMContentLoaded', () => {
       openModal($target);
     });
   });
+  (document.querySelectorAll('.js-modal-trigger2') || []).forEach(($trigger) => {
+    const modal = $trigger.dataset.target;
+    const $target = document.getElementById(modal);
+
+    $trigger.addEventListener('click', () => {
+      openModal($target);
+    });
+  });
+
 
   // Add a click event on various child elements to close the parent modal
   (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
@@ -238,14 +255,17 @@ document.addEventListener('DOMContentLoaded', () => {
 function retrieve(_callback) {
   console.log(localStorage.getItem("selected word"));
   _callback();
-  var selectedWord = localStorage.getItem("selected word").toUpperCase();
-  console.log(selectedWord);
+  var targetWord = localStorage.getItem("selected word");
+  //console.log(selectedWord);
   //wordArr.push(selectedWord);
-  selectedWordArr = selectedWord.split("");
-  console.log(selectedWordArr);
-  window.targetWord = selectedWordArr;
+  //selectedWordArr = selectedWord.split("");
+  //console.log(selectedWordArr);
+  window.targetWord = targetWord;
   console.log(targetWord);
 }
+
+
+
 
 
 
