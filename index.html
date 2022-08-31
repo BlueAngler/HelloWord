@@ -14,11 +14,14 @@
 
 <body>
    
+ 
    
 
    
     <div id="container">
-        <input type = "button" value= "Instructions" onclick="alert (' *Guess the word in 6 attempts\n *Each word attempt must be 5 letters long\n *Press Enter on keyboard to submit your answer\n ')" id="instructionsbutton">
+        <!--replaced with a seperate html page-->
+        <!-- <input type = "button" value= "Instructions" onclick="alert (' *Guess the word in 6 attempts\n *Each word attempt must be 5 letters long\n *Press Enter on keyboard to submit your answer\n ')" id="instructionsbutton"> -->
+        <a href="instructions.html" id="instructionslink">Instructions</a>
 
         <p class="panel-heading">
             Hello, Word!
@@ -102,7 +105,7 @@
             <button class="key" data-key="K">K</button>
             <button class="key" data-key="L">L</button>
             <div class="space"></div>
-            <button data-enter class="key large">Enter</button>
+            <button data-enter class="key large" id="enter-btn">Enter</button>
             <button class="key" data-key="Z">Z</button>
             <button class="key" data-key="X">X</button>
             <button class="key" data-key="C">C</button>
