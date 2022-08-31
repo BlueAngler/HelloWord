@@ -4,7 +4,7 @@ const DANCE_ANIMATION_DURATION= 500
 const keyboard = document.querySelector("[data-keyboard]");
 const alertContainer = document.querySelector("[data-alert-container]");
 const guessGrid = document.querySelector("[data-guess-grid]");
-const targetWord = ""
+var targetWord = [];
 
 startInteraction();
 
@@ -85,6 +85,7 @@ function submitGuess() {
     return
   }
   const guess = activeTiles.reduce((word, tile) => {
+
     return word + tile.dataset.letter
   }, "")
   console.log(guess)
@@ -115,7 +116,7 @@ function flipTile(tile, index, array, guess) {
     if (index === array.length - 1 ) {
       tile.addEventListener("transitionend", () => {
         startInteraction()
-        chekWinLose(guess, array)
+        checkWinLose(guess, array)
       }, { once: true })
      
     }
@@ -124,6 +125,7 @@ function flipTile(tile, index, array, guess) {
 
 function getActiveTiles() {
   return guessGrid.querySelectorAll('[data-state="active"]')
+
 }
 
 function shakeTiles(tiles) {
@@ -233,8 +235,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+function retrieve(_callback) {
+  console.log(localStorage.getItem("selected word"));
+  _callback();
+  var selectedWord = localStorage.getItem("selected word").toUpperCase();
+  console.log(selectedWord);
+  //wordArr.push(selectedWord);
+  selectedWordArr = selectedWord.split("");
+  console.log(selectedWordArr);
+  window.targetWord = selectedWordArr;
+  console.log(targetWord);
+}
 
-submitBtnEl.addEventListener("click", function () {
+
+
+submitBtnEl.addEventListener("click", function fetchReq() {
   var randomwordrequesturl = "https://random-word-api.herokuapp.com/word?length=5";
   console.log(randomwordrequesturl);
   fetch(randomwordrequesturl)
@@ -243,6 +258,12 @@ submitBtnEl.addEventListener("click", function () {
     })
     .then(function (data) {
       console.log(data);
+      var answer = data[0];
+      localStorage.setItem("selected word", answer);
+      retrieve(()=>{
+        console.log(localStorage.getItem("selected word"));
+      })
+      //console.log(localStorage.getItem("selected word"));
       function getHintsApi() {
         const options = {
           method: 'GET',
@@ -295,13 +316,6 @@ function getDifficulty() {
     document.querySelector(".js-modal-trigger2").style.display = "none";
   }
 }
-
-
-
-
-
-
-
 
 
 
