@@ -1,3 +1,4 @@
+//Some global variables that will need to be accessed at a later point.
 const WORD_LENGTH = 5;
 const FLIP_ANIMATION_DURATION = 500
 const DANCE_ANIMATION_DURATION= 500
@@ -39,7 +40,7 @@ function handleMouseClick(e) {
 
 // handle the keys pressed on keyboard
 function handleKeyPress(e) {
-  console.log(e);
+  //console.log(e);
   if (e.key === "Enter") {
     submitGuess();
     return;
@@ -79,7 +80,7 @@ function deleteKey() {
 function submitGuess() {
   const activeTiles = [...getActiveTiles()]
   if (activeTiles.length !== WORD_LENGTH) {
-    console.log("not")
+    //console.log("not")
     showAlert('Not Enough Letters')
     shakeTiles(activeTiles)
     return
@@ -88,10 +89,10 @@ function submitGuess() {
 
     return word + tile.dataset.letter
   }, "")
-  console.log(guess);
+  //console.log(guess);
 
   if (guess == targetWord) {
-    console.log("You Win");
+    //console.log("You Win");
   } else {
     
   }
@@ -251,9 +252,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
+//Function that waits for the API fetch request to complete and determine what the target word is and then saves that word to local storage. 
 function retrieve(_callback) {
-  console.log(localStorage.getItem("selected word"));
+  //console.log(localStorage.getItem("selected word"));
   _callback();
   var targetWord = localStorage.getItem("selected word");
   //console.log(selectedWord);
@@ -264,14 +265,12 @@ function retrieve(_callback) {
   console.log(targetWord);
 }
 
-
-
-
-
-
+/*Function that runs the first API to generate our random word and then uses
+that random word as an input for the next api to find the definition and a 
+synonym of that word*/
 submitBtnEl.addEventListener("click", function fetchReq() {
   var randomwordrequesturl = "https://random-word-api.herokuapp.com/word?length=5";
-  console.log(randomwordrequesturl);
+  //console.log(randomwordrequesturl);
   fetch(randomwordrequesturl)
     .then(function (response) {
       return response.json();
@@ -292,7 +291,7 @@ submitBtnEl.addEventListener("click", function fetchReq() {
             'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'
           }
         };
-
+        
         fetch('https://wordsapiv1.p.rapidapi.com/words/' + data[0] + '/definitions', options)
           .then(function (response) {
             return response.json();
@@ -301,7 +300,7 @@ submitBtnEl.addEventListener("click", function fetchReq() {
             console.log(data);
             console.log(data.definitions[0].definition);
             document.getElementById("hint").innerHTML = data.definitions[0].definition;
-            //document.getElementById("hint2").innerHTML = 
+            
           })
 
         fetch("https://wordsapiv1.p.rapidapi.com/words/" + data[0] + "/synonyms", options)
@@ -311,17 +310,20 @@ submitBtnEl.addEventListener("click", function fetchReq() {
           .then(function (data) {
             console.log(data);
             console.log(data.synonyms[0]);
-            document.getElementById("hint2").innerHTML = data.synonyms[0];
+            console.log(typeof(data.synonyms[0]));
+            // document.getElementById("hint2").innerHTML = data.synonyms[0];
+            if (typeof(data.synonyms[0]) === "undefined") {
+              document.getElementById("hint2").innerHTML = "Sorry, no synonym available.";
+            } else if (typeof(data.synonyms[0]) !== "undefined") {
+              document.getElementById("hint2").innerHTML = data.synonyms[0];
+            }
           })
-
       }
       getHintsApi();
-
-
     })
 })
 
-
+//Function that chooses whether or not the hint buttons are displayed given the users selected difficulty.
 function getDifficulty() {
   var difficulty = document.getElementById("difficulty").value;
   console.log(difficulty);
